@@ -7,28 +7,62 @@
 
 import UIKit
 
-class HangManScreen: UIViewController {
+extension String {
+    func characterAtIndex(index: Int) -> Character? {
+        var cur = 0
+        for char in self {
+            if cur == index {
+                return char
+            }
+            cur += 1
+        }
+        return nil
+    }
+}
 
+class HangManScreen: UIViewController, UITextFieldDelegate {
+
+    @IBOutlet weak var letsPlayHangmanText: UILabel!
     @IBOutlet weak var currentGuessesText: UILabel!
     @IBOutlet weak var blankSpacesText: UILabel!
     @IBOutlet weak var gameStringText: UILabel!
     @IBOutlet weak var textFieldPrompt: UITextField!
     
     let wordList: [String] = ["abstract","assert","boolean","break","byte","case","catch","char","class","continue","default","do","double","else","enum","extends","final","finally","float","for","if","implements","import","instanceof","int","interface","long","native","new","package","private","protected","public","return","short","static","super","switch","synchronized","this","throws","throw","transient","try","void","volatile","while"]
-    var currentGuesses: Int = 7
     
+    var currentGuesses: Int = 7
+    var gameString: String = ""
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let gameString: String = self.generateWord()
-        blankSpacesText.text = self.generateBlankSpaces(word: gameString)
+        self.textFieldPrompt.delegate = self; // this and textFieldShouldResign used to get keyboard to disappear on clicking Return
+       
+        gameString = generateWord()
+        blankSpacesText.text = generateBlankSpaces(word: gameString)
         gameStringText.text = gameString;
         currentGuessesText.text = "Current Guesses: \(currentGuesses)"
-
+    
     }
     
+    // ************************************************************ //
+    // *************             UI Logic             ************* //
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        textFieldPrompt.resignFirstResponder()
+    }
+    
+    @IBAction func enterWord(_ sender: Any) {
+        checkGuess(guess: textFieldPrompt.text!) // ! is something to do with force unwrapping
+    }
+    
+    // ************************************************************ //
+
     
     func generateWord() -> String {
         let randomNum: Int = Int.random(in: 0...wordList.count-1);
@@ -44,6 +78,30 @@ class HangManScreen: UIViewController {
         
         return blackSpaces
     }
+    
+    func checkGuess(guess: String) {
+        let character = guess.characterAtIndex(index: 0)
+        
+        //DOESNT WORK
+        if(guess.count == 1){
+            for (i, _) in gameString.enumerated(){
+                if(character?.lowercased() == gameString.characterAtIndex(index: i)?.lowercased()){
+                    letsPlayHangmanText.text = "Correct!"
+                }
+            }
+        }
+        else if(guess.lowercased() == gameString.lowercased()){
+            letsPlayHangmanText.text = "You WIN!"
+        }
+        else{
+            letsPlayHangmanText.text = "Incorrect"
+            currentGuesses -= 1
+            currentGuessesText.text = "Current Guesses: \(currentGuesses)"
+        }
+    }
+    
+
+
     
     
 
