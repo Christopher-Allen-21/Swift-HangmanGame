@@ -32,6 +32,7 @@ class HangManScreen: UIViewController, UITextFieldDelegate {
     
     var currentGuesses: Int = 7
     var gameString: String = ""
+    var indexOfMatches: [Int] = []
     
     
     override func viewDidLoad() {
@@ -44,6 +45,8 @@ class HangManScreen: UIViewController, UITextFieldDelegate {
         currentGuessesText.text = "Current Guesses: \(currentGuesses)"
     
     }
+    
+    
     
     // ************************************************************ //
     // *************             UI Logic             ************* //
@@ -64,6 +67,10 @@ class HangManScreen: UIViewController, UITextFieldDelegate {
     // ************************************************************ //
 
     
+    
+    
+    
+    
     func generateWord() -> String {
         let randomNum: Int = Int.random(in: 0...wordList.count-1);
         return wordList[randomNum]
@@ -80,17 +87,21 @@ class HangManScreen: UIViewController, UITextFieldDelegate {
     }
     
     func checkGuess(guess: String) {
-        let character = guess.characterAtIndex(index: 0)
+        let firstChar = guess.characterAtIndex(index: 0)
         
         if(guess.count == 1){
             var correct: Bool = false
             for (i, _) in gameString.enumerated(){
-                if(character?.lowercased() == gameString.characterAtIndex(index: i)?.lowercased()){
+                if(firstChar?.lowercased() == gameString.characterAtIndex(index: i)?.lowercased()){
                     letsPlayHangmanText.text = "Correct!"
+                    indexOfMatches.append(i)
                     correct = true
                 }
             }
-            if(!correct){
+            if(correct){
+                replaceBlanks(indexes: indexOfMatches)
+            }
+            else{
                 incorrectGuess()
             }
         }
@@ -109,19 +120,17 @@ class HangManScreen: UIViewController, UITextFieldDelegate {
         currentGuessesText.text = "Current Guesses: \(currentGuesses)"
     }
     
-
-
     
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func replaceBlanks(indexes: [Int]){
+        
+        
     }
-    */
+    
+
+
+    
+    
+
+  
 
 }
