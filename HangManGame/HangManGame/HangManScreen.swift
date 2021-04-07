@@ -82,22 +82,31 @@ class HangManScreen: UIViewController, UITextFieldDelegate {
     func checkGuess(guess: String) {
         let character = guess.characterAtIndex(index: 0)
         
-        //DOESNT WORK
         if(guess.count == 1){
+            var correct: Bool = false
             for (i, _) in gameString.enumerated(){
                 if(character?.lowercased() == gameString.characterAtIndex(index: i)?.lowercased()){
                     letsPlayHangmanText.text = "Correct!"
+                    correct = true
                 }
+            }
+            if(!correct){
+                incorrectGuess()
             }
         }
         else if(guess.lowercased() == gameString.lowercased()){
             letsPlayHangmanText.text = "You WIN!"
         }
         else{
-            letsPlayHangmanText.text = "Incorrect"
-            currentGuesses -= 1
-            currentGuessesText.text = "Current Guesses: \(currentGuesses)"
+            incorrectGuess()
         }
+    }
+    
+    
+    func incorrectGuess() {
+        letsPlayHangmanText.text = "Incorrect"
+        currentGuesses -= 1
+        currentGuessesText.text = "Current Guesses: \(currentGuesses)"
     }
     
 
