@@ -32,12 +32,13 @@ class HangManScreen: UIViewController, UITextFieldDelegate {
     
     var currentGuesses: Int = 7
     var gameString: String = ""
+    var blankSpaces: String = ""
     var indexOfMatches: [Int] = []
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.textFieldPrompt.delegate = self; // this and textFieldShouldResign used to get keyboard to disappear on clicking Return
+        self.textFieldPrompt.delegate = self; // this and textFieldShouldReturn() used to get keyboard to disappear on clicking Return
        
         gameString = generateWord()
         blankSpacesText.text = generateBlankSpaces(word: gameString)
@@ -61,7 +62,7 @@ class HangManScreen: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func enterWord(_ sender: Any) {
-        checkGuess(guess: textFieldPrompt.text!) // ! is something to do with force unwrapping
+        checkGuess(guess: textFieldPrompt.text!) // "!" is something to do with force unwrapping
     }
     
     // ************************************************************ //
@@ -77,13 +78,12 @@ class HangManScreen: UIViewController, UITextFieldDelegate {
     }
     
     func generateBlankSpaces(word: String) -> String {
-        var blackSpaces: String = ""
         // _ replaces a placeholder variable (compiler was throwing warning as it was never used)
         for _ in word {
-            blackSpaces.append("_  ")
+            blankSpaces.append("_  ")
         }
         
-        return blackSpaces
+        return blankSpaces
     }
     
     func checkGuess(guess: String) {
@@ -99,7 +99,7 @@ class HangManScreen: UIViewController, UITextFieldDelegate {
                 }
             }
             if(correct){
-                replaceBlanks(indexes: indexOfMatches)
+                replaceBlanks(indexOfMatch: indexOfMatches, letterGuess: firstChar!)
             }
             else{
                 incorrectGuess()
@@ -107,6 +107,8 @@ class HangManScreen: UIViewController, UITextFieldDelegate {
         }
         else if(guess.lowercased() == gameString.lowercased()){
             letsPlayHangmanText.text = "You WIN!"
+            replaceAllBlanks()
+            
         }
         else{
             incorrectGuess()
@@ -120,14 +122,29 @@ class HangManScreen: UIViewController, UITextFieldDelegate {
         currentGuessesText.text = "Current Guesses: \(currentGuesses)"
     }
     
+    func replaceAllBlanks(){
+        blankSpaces = ""
+        for char in gameString{
+            blankSpaces.append("\(char) ")
+        }
+        blankSpacesText.text = blankSpaces
+    }
     
-    func replaceBlanks(indexes: [Int]){
-        
-        
+    func replaceBlanks(indexOfMatch: [Int],letterGuess: Character){
+        blankSpaces = ""
+        for char in gameString{
+            if(char == letterGuess){
+                blankSpaces.append("\(letterGuess)  ")
+            }
+            else{
+                blankSpaces.append("_  ")
+            }
+        }
+        blankSpacesText.text = blankSpaces
     }
     
 
-
+   
     
     
 
