@@ -162,6 +162,7 @@ class HangManScreen: UIViewController, UITextFieldDelegate {
         gameString = ""
         blankSpaces = ""
         indexOfMatches.removeAll()
+        letsPlayHangmanText.text = "Let's Play Hangman!"
         gameStringText.isHidden = true
         yesButton.isHidden = true
         yesButton.isEnabled = false
@@ -205,11 +206,6 @@ class HangManScreen: UIViewController, UITextFieldDelegate {
         let modifiedString = String(chars)
         return modifiedString
     }
-
-   
     
     
-
-  
-
 }
