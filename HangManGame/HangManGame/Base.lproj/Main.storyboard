@@ -35,19 +35,42 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Please enter guess:" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xKQ-iT-YYu">
-                                <rect key="frame" x="20" y="319" width="374" height="39"/>
+                                <rect key="frame" x="20" y="319" width="374" height="38.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                 <connections>
                                     <action selector="enterWord:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="bVB-qO-1Yn"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="gameString" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eax-M9-Eyf">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="gameString" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eax-M9-Eyf">
                                 <rect key="frame" x="20" y="233" width="374" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Play Again?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hw1-cP-Nmj">
+                                <rect key="frame" x="20" y="402" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HfC-Hu-Tp9">
+                                <rect key="frame" x="100" y="443" width="214" height="30"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <state key="normal" title="Yes">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="clickYesButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pcF-RW-Rs6"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cMT-lU-4yY">
+                                <rect key="frame" x="100" y="499" width="214" height="30"/>
+                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                <state key="normal" title="No">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -59,13 +82,24 @@
                             <constraint firstItem="xKQ-iT-YYu" firstAttribute="top" secondItem="eax-M9-Eyf" secondAttribute="bottom" constant="57" id="CAh-3j-qV1"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="eax-M9-Eyf" secondAttribute="trailing" constant="20" id="CZB-WK-U6J"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lkL-kE-Ffv" secondAttribute="trailing" constant="20" id="E0S-yS-be9"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cMT-lU-4yY" secondAttribute="trailing" constant="100" id="J54-f4-iig"/>
                             <constraint firstItem="xKQ-iT-YYu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="KU6-jU-v7H"/>
+                            <constraint firstItem="HfC-Hu-Tp9" firstAttribute="top" secondItem="hw1-cP-Nmj" secondAttribute="bottom" constant="21" id="Lle-Yk-tMo"/>
                             <constraint firstItem="lkL-kE-Ffv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="37" id="MS3-oD-n02"/>
+                            <constraint firstItem="cMT-lU-4yY" firstAttribute="top" secondItem="HfC-Hu-Tp9" secondAttribute="bottom" constant="26" id="Pxe-8k-Tol"/>
                             <constraint firstItem="dlu-co-kPc" firstAttribute="top" secondItem="Jik-DG-PlY" secondAttribute="bottom" constant="8" symbolic="YES" id="QcJ-dJ-9zz"/>
                             <constraint firstItem="dlu-co-kPc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Rdl-mG-qJa"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="HfC-Hu-Tp9" secondAttribute="trailing" constant="100" id="T7x-6M-et8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="cMT-lU-4yY" secondAttribute="bottom" constant="198" id="V4C-Pc-ATF"/>
+                            <constraint firstItem="hw1-cP-Nmj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Vkj-di-2Gh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xKQ-iT-YYu" secondAttribute="trailing" constant="20" id="Wa7-mt-thF"/>
                             <constraint firstItem="Jik-DG-PlY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Xvv-Ot-7t4"/>
+                            <constraint firstItem="HfC-Hu-Tp9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="fUF-eR-wHH"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Jik-DG-PlY" secondAttribute="trailing" constant="20" id="hGO-pV-zM4"/>
+                            <constraint firstItem="cMT-lU-4yY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="kUs-I8-EaF"/>
+                            <constraint firstItem="cMT-lU-4yY" firstAttribute="top" secondItem="HfC-Hu-Tp9" secondAttribute="bottom" constant="26" id="l5e-zF-8HI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hw1-cP-Nmj" secondAttribute="trailing" constant="20" id="nx1-8d-zY9"/>
+                            <constraint firstItem="HfC-Hu-Tp9" firstAttribute="top" secondItem="hw1-cP-Nmj" secondAttribute="bottom" constant="21" id="u5a-6C-wQP"/>
                             <constraint firstItem="lkL-kE-Ffv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="xsh-Oq-H2O"/>
                         </constraints>
                     </view>
@@ -74,7 +108,10 @@
                         <outlet property="currentGuessesText" destination="Jik-DG-PlY" id="hrp-DE-kOZ"/>
                         <outlet property="gameStringText" destination="eax-M9-Eyf" id="JYb-d5-Fp2"/>
                         <outlet property="letsPlayHangmanText" destination="lkL-kE-Ffv" id="ckr-qm-J0B"/>
+                        <outlet property="noButton" destination="cMT-lU-4yY" id="mDv-vA-WWD"/>
+                        <outlet property="playAgainText" destination="hw1-cP-Nmj" id="T3e-6d-fyu"/>
                         <outlet property="textFieldPrompt" destination="xKQ-iT-YYu" id="hip-7s-N0c"/>
+                        <outlet property="yesButton" destination="HfC-Hu-Tp9" id="SiQ-ce-IuR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -85,6 +122,12 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

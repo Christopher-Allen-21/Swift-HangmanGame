@@ -27,10 +27,15 @@ class HangManScreen: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var blankSpacesText: UILabel!
     @IBOutlet weak var gameStringText: UILabel!
     @IBOutlet weak var textFieldPrompt: UITextField!
+    @IBOutlet weak var yesButton: UIButton!
+    @IBOutlet weak var noButton: UIButton!
+    @IBOutlet weak var playAgainText: UILabel!
+    
+    
     
     let wordList: [String] = ["abstract","assert","boolean","break","byte","case","catch","char","class","continue","default","do","double","else","enum","extends","final","finally","float","for","if","implements","import","instanceof","int","interface","long","native","new","package","private","protected","public","return","short","static","super","switch","synchronized","this","throws","throw","transient","try","void","volatile","while"]
     
-    var currentGuesses: Int = 7
+    var currentGuesses: Int = 5
     var gameString: String = ""
     var blankSpaces: String = ""
     var indexOfMatches: [Int] = []
@@ -64,6 +69,11 @@ class HangManScreen: UIViewController, UITextFieldDelegate {
     @IBAction func enterWord(_ sender: Any) {
         checkGuess(guess: textFieldPrompt.text!) // "!" is something to do with force unwrapping
     }
+    
+    @IBAction func clickYesButton(_ sender: Any) {
+        resetGame()
+    }
+    
     
     // ************************************************************ //
 
@@ -115,13 +125,52 @@ class HangManScreen: UIViewController, UITextFieldDelegate {
         else{
             incorrectGuess()
         }
+        
         textFieldPrompt.text = "";
+        if(currentGuesses == 0){
+            playerLoses()
+        }
     }
     
     
     func playerWins(){
         letsPlayHangmanText.text = "You WIN!"
         replaceAllBlanks()
+        textFieldPrompt.isEnabled = false
+        playAgainPrompt()
+    }
+    
+    func playerLoses(){
+        letsPlayHangmanText.text = "You LOSE!"
+        gameStringText.text = "The word was: \(gameString)"
+        gameStringText.isHidden = false
+        textFieldPrompt.isEnabled = false
+        playAgainPrompt()
+    }
+    
+    func playAgainPrompt(){
+        yesButton.isHidden = false
+        yesButton.isEnabled = true
+        noButton.isHidden = false
+        noButton.isEnabled = true
+        playAgainText.isHidden = false
+        playAgainText.isEnabled = true
+    }
+    
+    func resetGame(){
+        currentGuesses = 5
+        gameString = ""
+        blankSpaces = ""
+        indexOfMatches.removeAll()
+        gameStringText.isHidden = true
+        yesButton.isHidden = true
+        yesButton.isEnabled = false
+        noButton.isHidden = true
+        noButton.isEnabled = false
+        playAgainText.isHidden = true
+        playAgainText.isEnabled = false
+        textFieldPrompt.isEnabled = true
+        viewDidLoad()
     }
     
     func incorrectGuess() {
