@@ -100,21 +100,29 @@ class HangManScreen: UIViewController, UITextFieldDelegate {
             }
             if(correct){
                 replaceBlanks(indexOfMatch: indexOfMatches, letterGuess: firstChar!)
+                if(blankSpaces.filter { !$0.isWhitespace } == gameString){
+                    playerWins()
+                }
             }
             else{
                 incorrectGuess()
             }
         }
         else if(guess.lowercased() == gameString.lowercased()){
-            letsPlayHangmanText.text = "You WIN!"
-            replaceAllBlanks()
+            playerWins()
             
         }
         else{
             incorrectGuess()
         }
+        textFieldPrompt.text = "";
     }
     
+    
+    func playerWins(){
+        letsPlayHangmanText.text = "You WIN!"
+        replaceAllBlanks()
+    }
     
     func incorrectGuess() {
         letsPlayHangmanText.text = "Incorrect"
@@ -125,7 +133,7 @@ class HangManScreen: UIViewController, UITextFieldDelegate {
     func replaceAllBlanks(){
         blankSpaces = ""
         for char in gameString{
-            blankSpaces.append("\(char) ")
+            blankSpaces.append("\(char)  ")
         }
         blankSpacesText.text = blankSpaces
     }
