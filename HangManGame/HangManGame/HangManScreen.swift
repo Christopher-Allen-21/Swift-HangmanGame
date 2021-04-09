@@ -131,18 +131,23 @@ class HangManScreen: UIViewController, UITextFieldDelegate {
     }
     
     func replaceBlanks(indexOfMatch: [Int],letterGuess: Character){
-        blankSpaces = ""
-        for char in gameString{
-            if(char == letterGuess){
-                blankSpaces.append("\(letterGuess)  ")
-            }
-            else{
-                blankSpaces.append("_  ")
+        for (indexOfBlanks,_) in blankSpaces.enumerated(){
+            for indexOfM in indexOfMatch{
+                if(indexOfM == indexOfBlanks){
+                    blankSpaces = replace(myString: blankSpaces, indexOfBlanks*3, letterGuess)
+                }
             }
         }
+        indexOfMatches.removeAll()
         blankSpacesText.text = blankSpaces
     }
     
+    func replace(myString: String, _ index: Int, _ newChar: Character) -> String {
+        var chars = Array(myString)     // gets an array of characters
+        chars[index] = newChar
+        let modifiedString = String(chars)
+        return modifiedString
+    }
 
    
     
